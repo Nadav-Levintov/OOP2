@@ -1,6 +1,8 @@
 package OOP2.Solution;
 
+import OOP2.Provided.ConnectionAlreadyExistException;
 import OOP2.Provided.Person;
+import OOP2.Provided.SamePersonException;
 import OOP2.Provided.Status;
 
 import java.util.*;
@@ -10,6 +12,7 @@ public class PersonImpl implements Person {
 	Integer id;
 	String name;
 	Set<Status> statuses;
+	Set<Person> friends;
 	/**
 	 * Constructor receiving person's id and name.
 	 */
@@ -18,6 +21,7 @@ public class PersonImpl implements Person {
 		this.id=id;
 		this.name=name;
 		statuses = new HashSet<Status>();
+		friends = new HashSet<Person>();
 
 	}
 
@@ -37,4 +41,23 @@ public class PersonImpl implements Person {
 		statuses.add(st);
 		return st;
 	}
+
+	@Override
+	public void addFriend(Person p) throws SamePersonException, ConnectionAlreadyExistException
+    {
+	    if (this==p)
+	    {
+		    throw new SamePersonException();
+	    }
+        if(friends.contains(p))
+	    {
+		    	throw new ConnectionAlreadyExistException();
+        }
+        friends.add(p);
+	}
+
+    @Override
+    public Collection<Person> getFriends() {
+        return friends;
+    }
 }
