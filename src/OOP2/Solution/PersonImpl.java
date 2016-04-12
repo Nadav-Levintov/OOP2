@@ -45,7 +45,7 @@ public class PersonImpl implements Person {
 	@Override
 	public void addFriend(Person p) throws SamePersonException, ConnectionAlreadyExistException
     {
-	    if (this==p)
+	    if (this.equals(p))
 	    {
 		    throw new SamePersonException();
 	    }
