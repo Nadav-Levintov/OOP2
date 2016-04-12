@@ -11,7 +11,7 @@ public class PersonImpl implements Person {
 
 	Integer id;
 	String name;
-	Set<Status> statuses;
+	LinkedList<Status> statuses;
 	Set<Person> friends;
 	/**
 	 * Constructor receiving person's id and name.
@@ -20,7 +20,7 @@ public class PersonImpl implements Person {
 	{
 		this.id=id;
 		this.name=name;
-		statuses = new HashSet<Status>();
+		statuses = new LinkedList<Status>();
 		friends = new HashSet<Person>();
 
 	}
@@ -38,7 +38,7 @@ public class PersonImpl implements Person {
 	@Override
 	public Status postStatus(String content) {
 		Status st = new StatusImpl(this,content,statuses.size());
-		statuses.add(st);
+		statuses.addFirst(st);
 		return st;
 	}
 
@@ -60,4 +60,46 @@ public class PersonImpl implements Person {
     public Collection<Person> getFriends() {
         return friends;
     }
+
+	@Override
+	public Iterable<Status> getStatusesRecent() {
+		Collections.sort(statuses, new Comparator<Status>() {
+			@Override
+			public int compare(Status s1, Status s2) {
+					return (s2.getId()- s1.getId());
+			}
+		});
+		return statuses;
+	}
+
+	@Override
+	public Iterable<Status> getStatusesPopular() {
+		Collections.sort(statuses, new Comparator<Status>() {
+			@Override
+			public int compare(Status s1, Status s2) {
+				if(s1.getLikesCount() != s2.getLikesCount()) {
+					return (s1.getLikesCount() - s2.getLikesCount());
+				}
+				else
+				{
+					return (s2.getId() - s1.getId());
+				}
+			}
+		});
+		return statuses;
+	}
+
+    @Override
+    public int compareTo(Person o) {
+        return (id - o.getId());
+    }
+    @Override
+    public boolean equals(Object o) {
+        if(o== null)
+            return false;
+        if (o.getClass() != this.getClass())
+            return false;
+        return (id == ((Person)o).getId());
+    }
+
 }
