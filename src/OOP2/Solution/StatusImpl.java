@@ -62,4 +62,12 @@ public class StatusImpl implements Status {
 	public Integer getLikesCount() {
 		return likes.size();
 	}
+
+	public boolean equals(Object o) {
+		if(o== null)
+			return false;
+		if (o.getClass() != this.getClass())
+			return false;
+		return (id == ((Status)o).getId());
+	}
 }
