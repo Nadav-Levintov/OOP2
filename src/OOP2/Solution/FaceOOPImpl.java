@@ -85,7 +85,8 @@ public class FaceOOPImpl implements FaceOOP {
 
         }
 
-        StatusIterator res = (StatusIterator)feed.iterator();
+        StatusIterator res;
+        res = new StatusItaratorImpl(feed.iterator());
         return res;
     }
 
@@ -113,7 +114,7 @@ public class FaceOOPImpl implements FaceOOP {
 
         }
 
-        StatusIterator res = (StatusIterator)feed.iterator();
+        StatusIterator res = new StatusItaratorImpl(feed.iterator());
 
         return res;
     }

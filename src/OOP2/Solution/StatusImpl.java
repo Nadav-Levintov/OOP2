@@ -2,10 +2,9 @@ package OOP2.Solution;
 
 import OOP2.Provided.Person;
 import OOP2.Provided.Status;
+import OOP2.Provided.StatusIterator;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class StatusImpl implements Status {
 
