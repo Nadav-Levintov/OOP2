@@ -78,7 +78,7 @@ public class PersonImpl implements Person {
 			@Override
 			public int compare(Status s1, Status s2) {
 				if(s1.getLikesCount() != s2.getLikesCount()) {
-					return (s1.getLikesCount() - s2.getLikesCount());
+					return (s2.getLikesCount() - s1.getLikesCount());
 				}
 				else
 				{
