@@ -21,7 +21,7 @@ public class PersonImpl implements Person {
 		this.id=id;
 		this.name=name;
 		statuses = new LinkedList<Status>();
-		friends = new HashSet<Person>();
+		friends = new TreeSet<Person>();
 
 	}
 
@@ -63,18 +63,20 @@ public class PersonImpl implements Person {
 
 	@Override
 	public Iterable<Status> getStatusesRecent() {
-		Collections.sort(statuses, new Comparator<Status>() {
+		LinkedList<Status> recent = (LinkedList<Status>)statuses.clone();
+		Collections.sort(recent, new Comparator<Status>() {
 			@Override
 			public int compare(Status s1, Status s2) {
 					return (s2.getId()- s1.getId());
 			}
 		});
-		return statuses;
+		return recent;
 	}
 
 	@Override
 	public Iterable<Status> getStatusesPopular() {
-		Collections.sort(statuses, new Comparator<Status>() {
+		LinkedList<Status> popular = (LinkedList<Status>)statuses.clone();
+		Collections.sort(popular, new Comparator<Status>() {
 			@Override
 			public int compare(Status s1, Status s2) {
 				if(s1.getLikesCount() != s2.getLikesCount()) {
@@ -86,7 +88,7 @@ public class PersonImpl implements Person {
 				}
 			}
 		});
-		return statuses;
+		return popular;
 	}
 
     @Override
@@ -99,7 +101,7 @@ public class PersonImpl implements Person {
             return false;
         if (o.getClass() != this.getClass())
             return false;
-        return (id == ((Person)o).getId());
+        return (id.equals(((Person)o).getId()));
     }
 
 }

@@ -5,14 +5,14 @@ import OOP2.Provided.*;
 import java.util.*;
 
 public class FaceOOPImpl implements FaceOOP {
-	HashMap<Integer,Person> personMap;
+	TreeMap<Integer,Person> personMap;
 
 	/**
 	 * Constructor - receives no parameters and initializes the system.
 	 */
 	public FaceOOPImpl()
 	{
-		personMap = new HashMap<Integer, Person>();
+		personMap = new TreeMap<Integer, Person>();
 
 	}
 
@@ -35,7 +35,7 @@ public class FaceOOPImpl implements FaceOOP {
 
 	@Override
 	public Person getUser(Integer id) throws PersonNotInSystemException {
-	if(personMap.containsKey(id))
+	if(!personMap.containsKey(id))
 	{
 		throw new PersonNotInSystemException();
 	}
@@ -114,6 +114,7 @@ public class FaceOOPImpl implements FaceOOP {
         }
 
         StatusIterator res = (StatusIterator)feed.iterator();
+
         return res;
     }
 
@@ -129,7 +130,7 @@ public class FaceOOPImpl implements FaceOOP {
         }
 
         LinkedList<Person> q = new LinkedList<Person>();
-        HashMap<Person,Integer> graph = new HashMap<Person, Integer>();
+        TreeMap<Person,Integer> graph = new TreeMap<Person, Integer>();
         for(Person p : personMap.values())
         {
             graph.put(p,Integer.MAX_VALUE);

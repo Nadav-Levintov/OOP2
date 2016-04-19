@@ -5,6 +5,7 @@ import OOP2.Provided.Status;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class StatusImpl implements Status {
 
@@ -23,7 +24,7 @@ public class StatusImpl implements Status {
 		this.id = id;
 		this.content = content;
 		this.publisher = publisher;
-		likes = new HashSet<Person>();
+		likes = new TreeSet<Person>();
 
 	}
 
@@ -68,6 +69,6 @@ public class StatusImpl implements Status {
 			return false;
 		if (o.getClass() != this.getClass())
 			return false;
-		return (id == ((Status)o).getId());
+		return ((id.equals(((Status)o).getId()))&& (publisher.equals(((Status)o).getPublisher())));
 	}
 }
